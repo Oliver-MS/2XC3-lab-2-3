@@ -22,7 +22,7 @@ def create_near_sorted_list(length, max_value, swaps):
 
 
 # I have created this function to make the sorting algorithm code read easier
-def swap(L, i, j):
+def swap(L:list, i:int, j:int):
     L[i], L[j] = L[j], L[i]
 
 
@@ -70,6 +70,19 @@ def bubble_sort(L):
             if L[j] > L[j+1]:
                 swap(L, j, j+1)
 
+def bubble_sort2(L:list):
+    for i in range(len(L)):
+        value = L[i]
+        while i < len(L) - 1:
+            if L[i+1] < value:
+                L[i] = L[i+1]
+                i += 1
+            else:
+                L[i] = value
+                value = L[i+1]
+                i += 1
+            
+
 
 # ******************* Selection sort code *******************
 
@@ -86,3 +99,13 @@ def find_min_index(L, n):
         if L[i] < L[min_index]:
             min_index = i
     return min_index
+
+# ******************* Testing *******************
+
+experiments = 5
+for _ in range(experiments):
+    rand_list = create_random_list(10,20)
+    print(rand_list)
+    bubble_sort2(rand_list)
+    print(rand_list)
+    print()
