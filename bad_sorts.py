@@ -4,7 +4,7 @@ Feel free to modify and/or add functions to this file.
 """
 import random
 import time
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 
 # Create a random list length "length" containing whole numbers between 0 and max_value inclusive
@@ -113,31 +113,46 @@ print(test)
 '''
 
 
-experiments = 1000
-list_size = 100
-max_val = 500
+experiments = 500
+max_list_size = 75
+max_val = 100
 
 #bubble_sort testing
-total_time = 0
-for _ in range(experiments):
-    before = time.perf_counter()
+times = []
+sizes = []
+for i in range(max_list_size):
+    total_time = 0
+    for _ in range(experiments):
+        before = time.perf_counter()
 
-    rand_list = create_random_list(list_size,max_val)
-    bubble_sort(rand_list)
+        rand_list = create_random_list(i,max_val)
+        bubble_sort(rand_list)
 
-    after = time.perf_counter()
-    total_time += (after - before)
-print(f"average time to run bubble_sort on a list of size {list_size} {experiments} times: {total_time/experiments}")
+        after = time.perf_counter()
+        total_time += (after - before)
+    sizes.append(i)
+    times.append(total_time)
+plt.plot(sizes, times, label="bubblesort")
 
 
 #bubble_sort2 testing
-total_time = 0
-for _ in range(experiments):
-    before = time.perf_counter()
+times = []
+sizes = []
+for i in range(max_list_size):
+    total_time = 0
+    for _ in range(experiments):
+        before = time.perf_counter()
 
-    rand_list = create_random_list(list_size,max_val)
-    bubble_sort2(rand_list)
+        rand_list = create_random_list(i,max_val)
+        bubble_sort2(rand_list)
 
-    after = time.perf_counter()
-    total_time += (after - before)
-print(f"average time to run bubble_sort2 on a list of size {list_size} {experiments} times: {total_time/experiments}")
+        after = time.perf_counter()
+        total_time += (after - before)
+    sizes.append(i)
+    times.append(total_time)
+plt.plot(sizes, times, label="bubblesort2")
+plt.xlabel("size of list")
+plt.ylabel("time to sort (seconds)")
+plt.title(f"Comparing the Runtime of bubble_sort vs. bubble_sort2, averaged over {experiments} experiments")
+plt.legend()
+plt.show()
