@@ -71,16 +71,18 @@ def bubble_sort(L):
                 swap(L, j, j+1)
 
 def bubble_sort2(L:list):
-    for i in range(len(L)):
+    for _ in range(len(L)):
+        i = 0
         value = L[i]
         while i < len(L) - 1:
             if L[i+1] < value:
                 L[i] = L[i+1]
                 i += 1
-            else:
+            elif i != len(L) - 1:
                 L[i] = value
                 value = L[i+1]
                 i += 1
+        L[len(L)-1] = value
             
 
 
