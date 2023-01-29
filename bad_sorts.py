@@ -66,24 +66,46 @@ def insert2(L, i):
 # ******************* Bubble sort code *******************
 
 # Traditional Bubble sort
-def bubble_sort(L):
+def bubble_sort(L:list):
     for i in range(len(L)):
         for j in range(len(L) - 1):
             if L[j] > L[j+1]:
                 swap(L, j, j+1)
 
+#implements "optimizations" similar to insertion_sort2
 def bubble_sort2(L:list):
     for _ in range(len(L)):
         i = 0
         value = L[i]
         while i < len(L) - 1:
-            if L[i+1] < value:
-                L[i] = L[i+1]
+            next = L[i+1]
+            if next < value:
+                L[i] = next
             else:
                 L[i] = value
-                value = L[i+1]
+                value = next
             i += 1
         L[len(L)-1] = value
+
+#same as bubble_sort2 but with a clause that breaks early if the list is sorted
+def bubble_sort3(L:list):
+    for _ in range(len(L)):
+        i = 0
+        sorted = True
+        value = L[i]
+        while i < len(L) - 1:
+            next = L[i+1]
+            if next < value:
+                L[i] = next
+                if sorted == True:
+                    sorted = False
+            else:
+                L[i] = value
+                value = next
+            i += 1
+        L[len(L)-1] = value
+        if sorted == True:
+            break
             
 
 
@@ -102,57 +124,3 @@ def find_min_index(L, n):
         if L[i] < L[min_index]:
             min_index = i
     return min_index
-
-# ******************* Testing *******************
-
-'''
-test = create_random_list(10,20)
-print(test)
-bubble_sort2(test)
-print(test)
-'''
-
-
-experiments = 500
-max_list_size = 75
-max_val = 100
-
-#bubble_sort testing
-times = []
-sizes = []
-for i in range(max_list_size):
-    total_time = 0
-    for _ in range(experiments):
-        before = time.perf_counter()
-
-        rand_list = create_random_list(i,max_val)
-        bubble_sort(rand_list)
-
-        after = time.perf_counter()
-        total_time += (after - before)
-    sizes.append(i)
-    times.append(total_time)
-plt.plot(sizes, times, label="bubblesort")
-
-
-#bubble_sort2 testing
-times = []
-sizes = []
-for i in range(max_list_size):
-    total_time = 0
-    for _ in range(experiments):
-        before = time.perf_counter()
-
-        rand_list = create_random_list(i,max_val)
-        bubble_sort2(rand_list)
-
-        after = time.perf_counter()
-        total_time += (after - before)
-    sizes.append(i)
-    times.append(total_time)
-plt.plot(sizes, times, label="bubblesort2")
-plt.xlabel("size of list")
-plt.ylabel("time to sort (seconds)")
-plt.title(f"Comparing the Runtime of bubble_sort vs. bubble_sort2, averaged over {experiments} experiments")
-plt.legend()
-plt.show()
