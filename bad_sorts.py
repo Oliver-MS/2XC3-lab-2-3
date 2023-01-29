@@ -124,3 +124,28 @@ def find_min_index(L, n):
         if L[i] < L[min_index]:
             min_index = i
     return min_index
+
+#selection_sort2 is fucked atm and I don't know why
+def selection_sort2(L):
+    for i in range(len(L) // 2):
+        lower_bound, upper_bound = find_bounds(L, i)
+        print(lower_bound, upper_bound)
+        print(L)
+        swap(L, len(L) - (i + 1), upper_bound)
+        print(L)
+        swap(L, i, lower_bound)
+        print(L)
+        
+        
+def find_bounds(L, n):
+    min_index = n
+    max_index = n
+    for i in range(n+1, len(L)-n):
+        if L[i] < L[min_index]:
+            min_index = i
+        elif L[i] > L[max_index]:
+            max_index = i
+    return min_index,max_index
+
+test = create_random_list(10,10)
+selection_sort2(test)

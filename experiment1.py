@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 #The average time it takes to sort a list will be graphed.
 
 experiments = 750
-max_list_size = 85
+max_list_size = 100
 max_val = 100
 
 bubble_times = []
@@ -48,6 +48,6 @@ plt.plot(sizes, insertion_times, label="insertion_sort")
 
 plt.xlabel("size of list")
 plt.ylabel("time to sort (seconds)")
-plt.title(f"Comparing the Runtime of Bubble Sort, Selection Sort, and Insertion Sort,\naveraged over {experiments} experiments")
+plt.title(f"Comparing the Runtime of Bubble Sort, Selection Sort, and Insertion Sort,\nAveraged Over {experiments} Experiments")
 plt.legend()
 plt.show()
