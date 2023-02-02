@@ -129,13 +129,14 @@ def find_min_index(L, n):
 def selection_sort2(L):
     for i in range(len(L) // 2):
         lower_bound, upper_bound = find_bounds(L, i)
+        '''
         print(lower_bound, upper_bound)
         print(L)
         swap(L, len(L) - (i + 1), upper_bound)
         print(L)
         swap(L, i, lower_bound)
         print(L)
-        
+        '''
         
 def find_bounds(L, n):
     min_index = n
