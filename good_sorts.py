@@ -10,6 +10,8 @@ In contains traditional implementations for:
 Author: Vincent Maccio
 """
 
+import math
+
 # ************ Quick Sort ************
 def quicksort(L):
     copy = quicksort_copy(L)
@@ -28,6 +30,66 @@ def quicksort_copy(L):
         else:
             right.append(num)
     return quicksort_copy(left) + [pivot] + quicksort_copy(right)
+
+#dual pivot quicksort definition
+def quicksort2(L):
+    copy = quicksort_copy2(L)
+    for i in range(len(L)):
+        L[i] = copy[i]
+
+def quicksort_copy2(L):
+    if len(L) < 2:
+        return L
+    pivot1 = L[0]
+    pivot2 = L[1]
+    left, middle, right = [], [], []
+    for num in L[2:]: #everything that isn't one of the pivots
+        if num < pivot1 and num < pivot2:
+            left.append(num)
+        elif (num >= pivot1 and num < pivot2) or (num >= pivot2 and num < pivot1):
+            middle.append(num)
+        else:
+            right.append(num)
+    if pivot1 < pivot2:
+        return quicksort_copy2(left) + [pivot1] + quicksort_copy2(middle) + [pivot2] + quicksort_copy2(right)
+    else:
+        return quicksort_copy2(left) + [pivot2] + quicksort_copy2(middle) + [pivot1] + quicksort_copy2(right)
+    
+#quicksort with n pivots
+def npivot_quicksort(L, n):
+    copy = npivot_copy(L, n)
+    for i in range(len(L)):
+        L[i] = copy[i]
+    
+def npivot_copy(L, n):
+    if len(L) < 2:
+        return L
+    pivots = []
+    sublists = [[]]
+    if n < len(L):
+        for i in range(n):
+            pivots.append(L[i])
+            sublists.append([])
+    else:
+        for i in range(len(L)):
+            pivots.append(L[i])
+            sublists.append([])
+    quicksort(pivots) #this is kinda cheating but whatev
+    for num in L[n:]:
+        pivot_num = 0
+        for pivot in pivots:
+            if num < pivot:
+                sublists[pivot_num].append(num)
+                break
+            elif pivot_num == len(pivots) - 1: #num is bigger than all pivots
+                sublists[pivot_num + 1].append(num)
+                break
+            pivot_num += 1
+    next = npivot_copy(sublists[0],n)
+    for i in range(len(pivots)):
+        next.append(pivots[i])
+        next += (npivot_copy(sublists[i+1],n))
+    return next
 
 # *************************************
 

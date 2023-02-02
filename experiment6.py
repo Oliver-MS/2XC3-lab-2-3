@@ -1,50 +1,7 @@
 from bad_sorts import create_random_list
+from good_sorts import quicksort, quicksort2, npivot_quicksort
 import time
 from matplotlib import pyplot as plt
-
-#original quicksort definition
-def quicksort(L):
-    copy = quicksort_copy(L)
-    for i in range(len(L)):
-        L[i] = copy[i]
-
-
-def quicksort_copy(L):
-    if len(L) < 2:
-        return L
-    pivot = L[0]
-    left, right = [], []
-    for num in L[1:]:
-        if num < pivot:
-            left.append(num)
-        else:
-            right.append(num)
-    return quicksort_copy(left) + [pivot] + quicksort_copy(right)
-
-#modified quicksort definition
-def quicksort2(L):
-    copy = quicksort_copy2(L)
-    for i in range(len(L)):
-        L[i] = copy[i]
-
-
-def quicksort_copy2(L):
-    if len(L) < 2:
-        return L
-    pivot1 = L[0]
-    pivot2 = L[1]
-    left, middle, right = [], [], []
-    for num in L[2:]:
-        if num < pivot1 and num < pivot2:
-            left.append(num)
-        elif (num >= pivot1 and num < pivot2) or (num >= pivot2 and num < pivot1):
-            middle.append(num)
-        else:
-            right.append(num)
-    if pivot1 < pivot2:
-        return quicksort_copy2(left) + [pivot1] + quicksort_copy2(middle) + [pivot2] + quicksort_copy2(right)
-    else:
-        return quicksort_copy2(left) + [pivot2] + quicksort_copy2(middle) + [pivot1] + quicksort_copy2(right)
     
 #testing
 experiments = 1000
