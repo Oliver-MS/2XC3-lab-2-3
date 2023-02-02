@@ -2,7 +2,7 @@ from bad_sorts import selection_sort, bubble_sort, insertion_sort, create_random
 import time
 import matplotlib.pyplot as plt
 
-#Each of the three bad sorts will be tested {experiments} times on identical randomly generated lists of increasing size.
+#Each of the three bad sorts will be tested on identical randomly generated lists of increasing size.
 #The average time it takes to sort a list will be graphed.
 
 experiments = 750

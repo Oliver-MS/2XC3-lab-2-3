@@ -4,6 +4,9 @@ from matplotlib import pyplot as plt
 import time
 import math
 
+#Each of the three good sorts will be tested on identical randomly generated lists of increasing randomness.
+#The average time it takes to sort a list will be graphed.
+
 experiments = 500
 list_size = 100
 max_val = 100
