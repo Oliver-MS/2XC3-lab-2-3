@@ -3,7 +3,7 @@ import time
 import matplotlib.pyplot as plt
 
 from bad_sorts import create_random_list
-from good_sorts import mergesort
+from good_sorts import mergesort, merge
 
 experiments = 750
 max_list_size = 100
@@ -16,7 +16,6 @@ sizes = []
 def bottom_up_mergesort(L):
     width = 1
     n = len(L)
-
     while (width < n):
         l = 0
         while (l < n):
