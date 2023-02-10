@@ -13,25 +13,33 @@ merge_times = []
 bottom_up_merge_times = []
 sizes = []
 
+# new mergesort function that uses bottom-up mergesort
 def bottom_up_mergesort(L):
     width = 1
     n = len(L)
     while (width < n):
-        l = 0
-        while (l < n):
-            r = min(l + 2 * width - 1, n - 1)
-            m = min(l + width - 1, n - 1)
-            bottom_up_merge(L, l, m, r)
-            l += 2 * width
+        left_ind = 0
+        while (left_ind < n):
+            # this is the index of the last element in the right sublist
+            right_ind = min(left_ind + 2 * width - 1, n - 1)
+            # this is the index of the last element in the left sublist
+            middle_ind = min(left_ind + width - 1, n - 1)
+
+            bottom_up_merge(L, left_ind, middle_ind, right_ind)
+            # this moves the left index to the start of the next pair of sublists
+            left_ind += 2 * width
         width *= 2
     return L
 
-def bottom_up_merge(L, l, m, r):
-    left = L[l:m+1]
-    right = L[m+1:r+1]
+# we define a new merge function because the one in good_sorts.py is not in-place
+def bottom_up_merge(L, left_ind, middle_ind, right_ind):
+    # this splits the list into two sublists
+    left = L[left_ind:middle_ind+1]
+    right = L[middle_ind+1:right_ind+1]
     i = j = 0
-    k = l
+    k = left_ind
     
+    # this replaces the elements in L with the elements in the sublists depending on which is smaller
     while i < len(left) and j < len(right):
         if left[i] <= right[j]:
             L[k] = left[i]
@@ -41,11 +49,13 @@ def bottom_up_merge(L, l, m, r):
             j += 1
         k += 1
     
+    # this adds elements from the left sublist if there are any left
     while i < len(left):
         L[k] = left[i]
         i += 1
         k += 1
     
+    # this adds elements from the right sublist if there are any left
     while j < len(right):
         L[k] = right[j]
         j += 1
