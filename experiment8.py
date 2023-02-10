@@ -1,9 +1,10 @@
-from good_sorts import quicksort, mergesort
-from bad_sorts import create_random_list, insertion_sort
-from matplotlib import pyplot as plt
-import time
 import math
+import time
 
+from matplotlib import pyplot as plt
+
+from bad_sorts import create_random_list, insertion_sort
+from good_sorts import mergesort, quicksort
 
 experiments = 1000
 list_size = 9
