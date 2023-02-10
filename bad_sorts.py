@@ -87,6 +87,7 @@ def bubble_sort2(L:list):
             i += 1
         L[len(L)-1] = value
 
+
 #same as bubble_sort2 but with a clause that breaks early if the list is sorted
 def bubble_sort3(L:list):
     for _ in range(len(L)):
@@ -125,8 +126,29 @@ def find_min_index(L, n):
             min_index = i
     return min_index
 
-#selection_sort2 is fucked atm and I don't know why
+def find_max_index(L, n):
+    max_index = n
+    for i in range(n+1, len(L)):
+        if L[i] > L[max_index]:
+            max_index = i
+    return max_index
+
 def selection_sort2(L):
+    i=0
+    j=len(L)-1
+    while(i < j):
+        min_index = find_min_index(L, i)
+        max_index = find_max_index(L, j)
+        swap(L, i, min_index)
+        if max_index == i:
+            max_index = min_index
+        swap(L, j, max_index)
+        i+=1
+        j-=1
+
+
+#selection_sort2 is fucked atm and I don't know why
+def selection_sort23(L):
     for i in range(len(L) // 2):
         lower_bound, upper_bound = find_bounds(L, i)
         '''
@@ -137,6 +159,8 @@ def selection_sort2(L):
         swap(L, i, lower_bound)
         print(L)
         '''
+
+
         
 def find_bounds(L, n):
     min_index = n
