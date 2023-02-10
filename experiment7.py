@@ -60,6 +60,9 @@ def bottom_up_merge(L, left_ind, middle_ind, right_ind):
         L[k] = right[j]
         j += 1
         k += 1
+    # because we are not returning anything, the list is modified in place
+    # this also means that it will run faster than the merge function in good_sorts.py
+    # and will have better space complexity
 
 for i in range(max_list_size):
     total_bottom_up_merge_time = 0
