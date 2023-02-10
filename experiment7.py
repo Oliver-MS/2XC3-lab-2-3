@@ -79,6 +79,6 @@ plt.plot(sizes, merge_times, label = "mergesort")
 
 plt.xlabel("size of list")
 plt.ylabel("time to sort (seconds)")
-plt.title(f"Comparting the Runtime of Bottom Up Mergesort and Traditional Mergesort\nwith Lists of Size {max_list_size}, Averaged Over {experiments} Experiments")
+plt.title(f"Comparing the Runtime of Bottom Up Mergesort and Traditional Mergesort\nwith Lists of Size {max_list_size}, Averaged Over {experiments} Experiments")
 plt.legend()
 plt.show()
